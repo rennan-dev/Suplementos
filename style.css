@@ -5,17 +5,25 @@
     font-family: 'Open Sans';
 }
 header{
-    background: url(Imagens/GymMan2.jpg);
-    background-size: cover;
-    background-position:center;
-    height: 300px;
+    display: flex;
+    margin: 0 auto;
+    background-color: rgb(90, 84, 84);
+    max-width: 1165px;
 }
-header h1{
-    text-align: center;
-    font-size: 35px;
-    /* background-color: #000; */
-    color: #fff;
-    padding: 30px 0;
+header > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+header h1 {
+    text-decoration: underline
+}
+header  h2{
+    color: #ddbc27d2;
+}
+header img{
+    height: 200px;
 }
 .container{
     max-width: 1200px;
@@ -27,7 +35,7 @@ header h1{
     contain: paint;
 }
 /* SEÇÃO do contêiner de ITENS */
-.container .container-items{
+.container > div{
     margin-top: 30px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -37,35 +45,43 @@ header h1{
     width: 100%;
     transition: .3s;
 }
-.container .container-items .item{
+.item{
     max-width: 200px;
+    max-height: 400px;
+    min-height: 400px;
+    /*background: yellow;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
     margin: auto;
-    border: 1px solid #666;
+    border: 1px solid #e6e0e0;
     border-radius: 10px;
-    padding: 20px;
+    padding: 0 20px;
     transition: .3s;
 }
-.container .container-items .item .img-item{
-    width: 100%;
+.item img{
+    max-height: 200px;
+    min-height: 200px;
 }
-.container .container-items .item:hover{
+.item:hover{
     box-shadow: 0 0 10px #666;
     scale: 1.05;
 }
-.container .container-items .item .titulo-item{
+.titulo-item{
     display: block;
     font-weight: bold;
     text-align: center;
     text-transform: uppercase;
 }
-.container .container-items .item .price-item{
+.price-item{
     display: block;
     text-align: center;
     font-weight: bold;
     font-size: 22px;
 }
 
-.container .container-items .item .button-item{
+.button-item{
     display: block;
     margin: 10px auto;
     border: none;
