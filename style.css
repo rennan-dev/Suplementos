@@ -21,6 +21,9 @@ header h1 {
 }
 header  h2{
     color: #ddbc27d2;
+    font-size: 14px;
+    width: 100%;
+    text-align: center;
 }
 header img{
     height: 200px;
