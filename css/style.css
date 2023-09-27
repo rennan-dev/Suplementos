@@ -38,11 +38,7 @@ h4{
 
 #login h2 {
   text-align: center;
-<<<<<<< HEAD
 }
-=======
->>>>>>> 44e36e163d6e963bb00c8ab56dd72b9319acc9de
-
 /*----------header------------*/
 
 #header{
@@ -93,7 +89,29 @@ h4{
   padding: 12px;
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.05);
   border: none;
+  overflow-y: hidden;
+  max-height: 590px;
 }
+
+
+.additional-info {
+  padding: 10px; 
+  background-color: rgba#c3c3c3;
+  color: black;
+  width: 100%;
+  display: none;
+}
+
+.custom-card:hover .additional-info {
+  display: flex;
+  flex-direction: column;
+  opacity: 1;
+}
+
+.custom-card:hover {
+  max-height: 1200px;
+}
+
 
 .custom-img-width{
   width: 80px;
