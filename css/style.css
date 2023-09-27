@@ -39,6 +39,7 @@ h4{
 #login h2 {
   text-align: center;
 }
+
 /*----------header------------*/
 
 #header{
@@ -89,29 +90,7 @@ h4{
   padding: 12px;
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.05);
   border: none;
-  overflow-y: hidden;
-  max-height: 590px;
 }
-
-
-.additional-info {
-  padding: 10px; 
-  background-color: rgba#c3c3c3;
-  color: black;
-  width: 100%;
-  display: none;
-}
-
-.custom-card:hover .additional-info {
-  display: flex;
-  flex-direction: column;
-  opacity: 1;
-}
-
-.custom-card:hover {
-  max-height: 1200px;
-}
-
 
 .custom-img-width{
   width: 80px;
@@ -132,6 +111,16 @@ h4{
   height: 350px;
   background: #f1f1f1;
   border-radius: 12px;
+}
+
+/**--------main-------**/
+
+#product1 {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
 }
 
 /**--------footer--------**/
