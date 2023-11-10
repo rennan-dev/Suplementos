@@ -55,30 +55,30 @@
           <h2>Cadastrar</h2>
       </div>
       <div>
-          <form class="px-4 py-3" action="../index.html">
+          <form class="px-4 py-3" action="../config2.php" method="POST">
             <div class="row g-3 mb-3">
                 <div class="col">
                   <label for="exampleName" class="form-label">Primero Nome</label>
-                  <input type="text" class="form-control" aria-label="First name">
+                  <input type="text" name="nome" id="nome" class="form-control" aria-label="First name">
                 </div>
                   <div class="col">
                     <label for="exampleName" class="form-label">Sobrenome</label>
-                    <input type="text" class="form-control" aria-label="Last name">
+                    <input type="text" name="sobrenome" id="sobrenome" class="form-control" aria-label="Last name">
                 </div>
             </div>
             <div class="mb-3">
               <label for="exampleDropdownFormEmail1" class="form-label">Email</label>
-              <input type="email" class="form-control" id="exampleDropdownFormEmail1">
+              <input type="email" name="email" id="email" class="form-control">
             </div>
             <div class="mb-3">
               <label for="exampleDropdownFormPassword1" class="form-label">Senha</label>
-              <input type="password" class="form-control" id="exampleDropdownFormPassword1">
+              <input type="password" name="senha" id="senha" class="form-control">
             </div>
             <div class="mb-3">
               <label for="exampleDropdownFormPassword1" class="form-label">Confirmar Senha</label>
-              <input type="password" class="form-control" id="exampleDropdownFormPassword1">
+              <input type="password" name="checksenha" id="checksenha" class="form-control">
             </div>
-            <button type="submit" class="btn btn-primary">Cadastrar</button>
+            <button type="submit" class="btn btn-primary" name="cadastrar" id="cadastrar">Cadastrar</button>
           </form>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="signin.html">Já tem uma conta? Entre</a>
