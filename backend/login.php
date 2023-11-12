@@ -1,67 +1,61 @@
 <?php
-// Conexão com o banco de dados e outras configurações
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
 
-$host = "localhost"; // Altere para o host do seu banco de dados
-$username = "root"; // Altere para o nome de usuário do seu banco de dados
-$password = ""; // Altere para a senha do seu banco de dados
-$database = "suplementos"; // Altere para o nome do seu banco de dados
+session_start();
+include 'conexao.php';
 
-// Conectar ao banco de dados
-$mysqli = new mysqli($host, $username, $password, $database);
-
-// Verificar a conexão
-if ($mysqli->connect_error) {
-    die("Erro de conexão: " . $mysqli->connect_error);
-} else {
-    echo "Conectado com Sucesso";
-}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Verifica se o formulário foi submetido
+    $email = mysqli_real_escape_string($mysqli, $_POST['email']);
+    $senha = mysqli_real_escape_string($mysqli, $_POST['senha']);
+    //$nome = mysqli_real_escape_string($mysqli, $_POST['nome']);
 
-    $email = $_POST['email']; // Supondo que o campo de e-mail seja chamado 'email'
-    $senha = $_POST['senha']; // Supondo que o campo de senha seja chamado 'senha'
+    /*if (verificarCredenciais($mysqli, $email, $senha, $nome)) {
 
-    // Verificar as credenciais no banco de dados (substitua com a lógica real)
-    // Se as credenciais estiverem corretas, redirecione para a página inicial
-    if (verificarCredenciais($email, $senha)) {
+        // Armazenar o nome do usuário na sessão
+        $_SESSION['email'] = $email;
+        
         echo '<script type="text/javascript">
-                window.location.href = "../index.html";
-              </script>';
+            alert("Login bem-sucedido.");
+            window.location.replace("../index.html");
+            </script>';
     } else {
-        // Se as credenciais estiverem incorretas, exiba uma mensagem de erro
         echo '<script type="text/javascript">
-            alert("Credenciais incorretas.");
+            alert("Erro ao fazer login.");
             window.location.href = "../pages/signin.html";
           </script>';
-    }
+    }*/
+    verificarCredenciais($mysqli, $email, $senha);
 }
 
 // Função para verificar as credenciais no banco de dados
-function verificarCredenciais($email, $senha) {
-    // Substitua essas configurações com as informações reais do seu banco de dados
-    $dsn = 'mysql:host=localhost; dbname=suplementos;charset=utf8';
-    $usuario_bd = 'root';
-    $senha_bd = '';
+function verificarCredenciais($mysqli, $email, $senha) {
+    /*try {
+        $stmt = $mysqli->prepare("SELECT * FROM usuario WHERE email = ? AND senha = ?");
+        $stmt->bind_param("ss", $email, $senha);
+        $stmt->execute();
 
-    try {
-        $pdo = new PDO($dsn, $usuario_bd, $senha_bd);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $result = $stmt->get_result();
+        $usuario = $result->fetch_assoc();
 
-        $stmt = $pdo->prepare("SELECT * FROM usuario WHERE email = ? AND senha = ?");
-        $stmt->execute([$email, $senha]);
-        $usuario = $stmt->fetch();
-
-        // Verifica se o usuário foi encontrado no banco de dados
-        return ($usuario !== false);
-    } catch (PDOException $e) {
+        return ($usuario !== null);
+    } catch (Exception $e) {
         // Trate os erros de conexão ou consulta aqui
-        // Por exemplo, você pode registrar o erro ou redirecionar para uma página de erro
-        // echo "Erro de conexão: " . $e->getMessage();
+        // echo "Erro: " . $e->getMessage();
         return false;
+    }*/
+
+   $query = "SELECT * FROM usuario WHERE email='$email' AND senha='$senha'";
+    $result = $mysqli->query($query);
+
+    if($result->num_rows == 1) {
+        $_SESSION['email'] = $email;
+        //header("Location: ../index.html");
+        header("Location: ../index.html");
+    }else {
+        header("Location: ../pages/signin.html");
     }
+
+    $mysqli->clone();
 }
 
 ?>

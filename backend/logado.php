@@ -19,49 +19,35 @@ if ($mysqli->connect_error) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Verifica se o formulário foi submetido
+    $email = mysqli_real_escape_string($mysqli, $_POST['email']);
+    $nome = mysqli_real_escape_string($mysqli, $_POST['nome']);
 
-    $email = $_POST['email']; // Supondo que o campo de e-mail seja chamado 'email'
-    $nome = $_POST['nome'];
-
-    // Verificar as credenciais no banco de dados (substitua com a lógica real)
-    // Se as credenciais estiverem corretas, redirecione para a página inicial
-    if (verificarCredenciais($email, $nome)) {
-        echo '<script type="text/javascript">
-                window.location.href = "../index.html";
-              </script>';
+    if (verificarCredenciais($mysqli, $email, $nome)) {
+        header("Location: ../index.html");
+        exit();
     } else {
-        // Se as credenciais estiverem incorretas, exiba uma mensagem de erro
         echo '<script type="text/javascript">
-            alert("Credenciais incorretas.");
+            alert("Erro ao fazer login.");
             window.location.href = "../pages/signin.html";
           </script>';
     }
 }
 
 // Função para verificar as credenciais no banco de dados
-function verificarCredenciais($email, $nome) {
-    // Substitua essas configurações com as informações reais do seu banco de dados
-    $dsn = 'mysql:host=localhost; dbname=suplementos;charset=utf8';
-    $usuario_bd = 'root';
-    $nome_bd = '';
-
+function verificarCredenciais($mysqli, $email, $nome) {
     try {
-        $pdo = new PDO($dsn, $usuario_bd, $nome_bd);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $stmt = $mysqli->prepare("SELECT * FROM usuario WHERE email = ? AND nome = ?");
+        $stmt->bind_param("ss", $email, $nome);
+        $stmt->execute();
 
-        $stmt = $pdo->prepare("SELECT * FROM usuario WHERE email = ? AND nome = ?");
-        $stmt->execute([$email, $nome]);
-        $usuario = $stmt->fetch();
+        $result = $stmt->get_result();
+        $usuario = $result->fetch_assoc();
 
-        // Verifica se o usuário foi encontrado no banco de dados
-        return ($usuario !== false);
-    } catch (PDOException $e) {
+        return ($usuario !== null);
+    } catch (Exception $e) {
         // Trate os erros de conexão ou consulta aqui
-        // Por exemplo, você pode registrar o erro ou redirecionar para uma página de erro
-        // echo "Erro de conexão: " . $e->getMessage();
+        // echo "Erro: " . $e->getMessage();
         return false;
     }
 }
-
 ?>
