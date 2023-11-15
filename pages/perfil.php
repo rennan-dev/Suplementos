@@ -105,7 +105,7 @@ if (!isset($_SESSION["email"])) {
                     <form id="formEditNome">
                         <div class="mb-3">
                             <label for="editNome" class="form-label">Novo Nome:</label>
-                            <input type="text" class="form-control" id="editNome" name="novoNome">
+                            <input type="text" class="form-control" id="editNome" name="novoNome" required pattern="^\S.*$">
                         </div>
                         <button type="button" class="btn btn-primary" onclick="updateNome()">Salvar</button>
                     </form>
@@ -126,7 +126,7 @@ if (!isset($_SESSION["email"])) {
                     <form id="formEditSobrenome">
                         <div class="mb-3">
                             <label for="editSobrenome" class="form-label">Novo Sobrenome:</label>
-                            <input type="text" class="form-control" id="editSobrenome" name="novoSobrenome">
+                            <input type="text" class="form-control" id="editSobrenome" name="novoSobrenome" required pattern="^\S.*$">
                         </div>
                         <button type="button" class="btn btn-primary" onclick="updateSobrenome()">Salvar</button>
                     </form>
@@ -158,44 +158,63 @@ if (!isset($_SESSION["email"])) {
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function updateNome() {
+            const novoNome = document.getElementById('editNome').value;
 
-<script>
-    function updateNome() {
-        const novoNome = document.getElementById('editNome').value;
-
-        // Enviar dados para o servidor usando Ajax
-        $.ajax({
-            type: "POST",
-            url: "../backend/atualizar_dados.php",
-            data: { tipo: 'nome', novoValor: novoNome },
-            success: function (response) {
-                // Atualizar valor na página (opcional)
-                document.getElementById('nome').innerText = novoNome;
-
-                // Fechar o modal
-                $('#editNomeModal').modal('hide');
+            //não aceita espaços em branco
+            if (!/\S/.test(novoNome)) {
+                alert("Por favor, preencha o campo Novo Nome.");
+                return;
             }
-        });
-    }
-
-    function updateSobrenome() {
-        const novoSobrenome = document.getElementById('editSobrenome').value;
-
-        // Enviar dados para o servidor usando Ajax
-        $.ajax({
-            type: "POST",
-            url: "../backend/atualizar_dados.php",
-            data: { tipo: 'sobrenome', novoValor: novoSobrenome },
-            success: function (response) {
-                // Atualizar valor na página (opcional)
-                document.getElementById('sobrenome').innerText = novoSobrenome;
-
-                // Fechar o modal
-                $('#editSobrenomeModal').modal('hide');
+            if (novoNome.length < 2) {
+                alert("Por favor, preencha o campo com mais de um caractere.");
+                return;
             }
-        });
-    }
-</script>
+
+            // Enviar dados para o servidor usando Ajax
+            $.ajax({
+                type: "POST",
+                url: "../backend/atualizar_dados.php",
+                data: { tipo: 'nome', novoValor: novoNome },
+                success: function (response) {
+                    // Atualizar valor na página (opcional)
+                    document.getElementById('nome').innerText = novoNome;
+
+                    // Fechar o modal
+                    $('#editNomeModal').modal('hide');
+                }
+            });
+        }
+
+        function updateSobrenome() {
+            const novoSobrenome = document.getElementById('editSobrenome').value;
+
+            //não aceita espaços em branco
+            if (!/\S/.test(novoSobrenome)) {
+                alert("Por favor, preencha o campo Novo Nome.");
+                return;
+            }
+            if (novoSobrenome.length < 2) {
+                alert("Por favor, preencha o campo com mais de um caractere.");
+                return;
+            }
+
+            // Enviar dados para o servidor usando Ajax
+            $.ajax({
+                type: "POST",
+                url: "../backend/atualizar_dados.php",
+                data: { tipo: 'sobrenome', novoValor: novoSobrenome },
+                success: function (response) {
+                    // Atualizar valor na página (opcional)
+                    document.getElementById('sobrenome').innerText = novoSobrenome;
+
+                    // Fechar o modal
+                    $('#editSobrenomeModal').modal('hide');
+                }
+            });
+        }
+    </script>
 
 <!-- ... Seu código posterior ... -->
 

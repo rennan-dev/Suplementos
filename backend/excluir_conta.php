@@ -28,6 +28,6 @@ session_unset();
 session_destroy();
 
 // Redirecionar para a página de login ou outra página após a exclusão
-header("Location: ../pages/signin.html");
+header("Location: ../pages/signin.php");
 exit();
 ?>
