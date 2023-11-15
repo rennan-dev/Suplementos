@@ -86,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo '<script type="text/javascript">
             alert("Erro ao fazer login.");
-            window.location.href = "../pages/signin.html";
+            window.location.href = "../pages/signin.php";
           </script>';
     }
 

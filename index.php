@@ -87,6 +87,18 @@
   </header>
   <!--header end-->
 
+  <!-- Carrinho de Compras start-->
+  <div id="cart" class="cart card fixed-top bg-light" style="width: 300px; right: 0; margin-top: 110px;">
+    <div class="card-header">
+        <h3 class="card-title">Carrinho de Compras</h3>
+        <button id="toggle-products" class="btn btn-primary" style="position: absolute; top: 5px; right: 5px;" onclick="toggleProducts()">-</button>
+    </div>
+    <ul id="cart-items" class="list-group list-group-flush"></ul>
+    <p id="cart-total" class="card-footer bg-light text-dark font-weight-bold">Total: R$0</p>
+  </div>
+  <!--Carrinho de compras end-->
+
+
   <!--main section start-->
    <main class="container">
     <!--services section start-->
@@ -166,11 +178,11 @@
                 <h4 class="custom-highlight">R$99</h4>
               </div>
               <div class="float-end">
-                <a href="pages/pagamento.php"><button class="btn btn-primary rounded-3 custom-btn"><i class="fas fa-cart-shopping"></i> Compre Agora</button></a>
+              <button class="btn btn-primary rounded-3 custom-btn"><i class="fas fa-cart-shopping"></i> Adicionar ao Carrinho</button>
               </div>
             </div>
           </div>
-        </div>
+        </div>  
         <div class="col">
           <div class="card h-100 shadow custom-card">
             <a href="Pages/produtos/creatina2.php"><img id="product1" src="Imagens/ProdutosSemFundo/creatina_monohidratada_500g-removebg-preview.png" alt="" class="card-img-top w-100 custom-bg"></a>
@@ -184,7 +196,7 @@
                 <h4 class="custom-highlight">R$130</h4>
               </div>
               <div class="float-end">
-                <a href="pages/pagamento.php"><button class="btn btn-primary rounded-3 custom-btn"><i class="fas fa-cart-shopping"></i> Compre Agora</button></a>
+                <button class="btn btn-primary rounded-3 custom-btn"><i class="fas fa-cart-shopping"></i> Adicionar ao Carrinho</button>
               </div>
             </div>
           </div>
@@ -201,7 +213,7 @@
                 <h4 class="custom-highlight">R$150</h4>
               </div>
               <div class="float-end">
-                <a href="pages/pagamento.php"><button class="btn btn-primary rounded-3 custom-btn"><i class="fas fa-cart-shopping"></i> Compre Agora</button></a>
+                <button class="btn btn-primary rounded-3 custom-btn"><i class="fas fa-cart-shopping"></i> Adicionar ao Carrinho</button>
               </div>
             </div>
           </div>
@@ -228,7 +240,7 @@
                 <h4 class="custom-highlight">R$100</h4>
               </div>
               <div class="float-end">
-                <a href="pages/pagamento.php"><button class="btn btn-primary rounded-3 custom-btn"><i class="fas fa-cart-shopping"></i> Compre Agora</button></a>
+                <button class="btn btn-primary rounded-3 custom-btn"><i class="fas fa-cart-shopping"></i> Adicionar ao Carrinho</button>
               </div>
             </div>
           </div>
@@ -248,7 +260,7 @@
                 <h4 class="custom-highlight">R$60</h4>
               </div>
               <div class="float-end">
-                <a href="pages/pagamento.php"><button class="btn btn-primary rounded-3 custom-btn"><i class="fas fa-cart-shopping"></i> Compre Agora</button></a>
+                <button class="btn btn-primary rounded-3 custom-btn"><i class="fas fa-cart-shopping"></i> Adicionar ao Carrinho</button>
               </div>
             </div>
           </div>
@@ -267,7 +279,7 @@
                 <h4 class="custom-highlight">R$90</h4>
               </div>
               <div class="float-end">
-                <a href="pages/pagamento.php"><button class="btn btn-primary rounded-3 custom-btn"><i class="fas fa-cart-shopping"></i> Compre Agora</button></a>
+                <button class="btn btn-primary rounded-3 custom-btn"><i class="fas fa-cart-shopping"></i> Adicionar ao Carrinho</button>
               </div>
             </div>
           </div>
@@ -288,6 +300,118 @@
     </div>
   </footer>
   <!--footer end-->
+
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const addToCartButtons = document.querySelectorAll(".custom-btn");
+
+    addToCartButtons.forEach(button => {
+      button.addEventListener("click", addToCart);
+    });
+
+    function addToCart() {
+      // Obtenha informações do produto
+      const productContainer = this.closest(".custom-card");
+      const productName = productContainer.querySelector(".card-title").innerText;
+
+      // Verifique se o item já está no carrinho
+      const cartItems = document.querySelectorAll("#cart-items li");
+      const existingCartItem = Array.from(cartItems).find(item => item.innerText.includes(productName));
+
+      if (existingCartItem) {
+        // Se o item já existir, exiba um alerta
+        alert("Este produto já está no carrinho!");
+      } else {
+        // Caso contrário, adicione o item ao carrinho
+        const productPrice = parseFloat(productContainer.querySelector(".custom-highlight").innerText.replace("R$", ""));
+
+        const cartItem = document.createElement("li");
+        cartItem.innerHTML = `
+          <button class="btn btn-danger btn-sm" onclick="decrementQuantity(this)">-</button>
+          <span class="quantity">1</span>
+          <button class="btn btn-success btn-sm" onclick="incrementQuantity(this)">+</button>
+          ${productName} - R$${productPrice}
+        `;
+
+        document.getElementById("cart-items").appendChild(cartItem);
+
+        // Adicione eventos de clique para os novos botões
+        const decrementButton = cartItem.querySelector(".btn-danger");
+        const incrementButton = cartItem.querySelector(".btn-success");
+
+        decrementButton.addEventListener("click", () => decrementQuantity(cartItem));
+        incrementButton.addEventListener("click", () => incrementQuantity(cartItem));
+      }
+
+      // Atualize o total do carrinho
+      updateCartTotal();
+    }
+
+    function incrementQuantity(cartItem) {
+      const quantityElement = cartItem.querySelector(".quantity");
+      const quantity = parseInt(quantityElement.innerText);
+      quantityElement.innerText = quantity + 1;
+      updateCartTotal();
+    }
+
+    function decrementQuantity(cartItem) {
+      const quantityElement = cartItem.querySelector(".quantity");
+      const quantity = parseInt(quantityElement.innerText);
+
+      if (quantity > 1) {
+        // Se a quantidade for maior que 1, decrementa
+        quantityElement.innerText = quantity - 1;
+      } else {
+        // Se a quantidade for 1, remove o item do carrinho
+        cartItem.remove();
+      }
+
+      updateCartTotal();
+    }
+
+    function updateCartTotal() {
+      const cartItems = document.querySelectorAll("#cart-items li");
+      let total = 0;
+
+      cartItems.forEach(item => {
+        const itemText = item.innerText;
+        const price = parseFloat(itemText.substring(itemText.lastIndexOf("R$") + 2));
+        const quantity = parseInt(item.querySelector(".quantity").innerText);
+        total += price * quantity;
+      });
+
+      // Atualize o total do carrinho
+      document.getElementById("cart-total").innerText = `Total: R$${total.toFixed(2)}`;
+    }
+  });
+
+  function toggleProducts() {
+        var cartItems = document.getElementById('cart-items');
+        var cartTotal = document.getElementById('cart-total');
+        var productsButton = document.getElementById('toggle-products');
+
+        // Obtém o estilo atual do elemento
+        var cartItemsStyle = window.getComputedStyle(cartItems);
+
+        // Verifica se o display é 'none' ou vazio (na primeira vez)
+        if (cartItemsStyle.display === 'none' || cartItemsStyle.display === '') {
+            // Se os produtos estiverem minimizados, mostrar
+            cartItems.style.display = 'block';
+            cartTotal.style.display = 'block';
+            productsButton.innerText = '-';
+        } else {
+            // Se os produtos estiverem visíveis, minimizar
+            cartItems.style.display = 'none';
+            cartTotal.style.display = 'none';
+            productsButton.innerText = '+';
+        }
+    }
+</script>
+
+
+
+
+
 
   <script src="javascript/script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
