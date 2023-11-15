@@ -11,8 +11,6 @@ $mysqli = new mysqli($host, $username, $password, $database);
 // Verificar a conexão
 if ($mysqli->connect_error) {
     die("Erro de conexão: " . $mysqli->connect_error);
-} else {
-    echo "Conectado com Sucesso";
 }
 
 ?>

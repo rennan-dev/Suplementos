@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Cadastrar</title>
+  <title>Login</title>
   <!--bootstrap css-->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <!--main css-->
@@ -21,7 +21,7 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow custom-navbar">
       <div class="container container-fluid">
         <div class="navbar-header">
-          <a href="../index.html" class="navbar-brand float-end">
+          <a href="../index.php" class="navbar-brand float-end">
             <img src="../Imagens/urso_sem_fundo.png" alt="logo" class="img-reponsive custom-logo">
             <span class="custom-highlight">Bear</span>
           </a>
@@ -43,45 +43,42 @@
         </div>
       </div>
     </nav>
-    <!--navigation start-->
+    <!--navigation end-->
+
     
   </header>
-  <!--header end-->
+    
+ <!--header end-->
 
   <!--main section start-->
   <main class="container mt-5 card">
     <div class="card-body">
       <div id="login">
-          <h2>Cadastrar</h2>
+          <h2>Login</h2>
       </div>
       <div>
-          <form class="px-4 py-3" action="../backend/config.php" method="POST" onsubmit="return validarSenhas();">
-            <div class="row g-3 mb-3">
-                <div class="col">
-                  <label for="exampleName" class="form-label">Primero Nome</label>
-                  <input type="text" name="nome" id="nome" class="form-control" aria-label="First name" required>
-                </div>
-                  <div class="col">
-                    <label for="exampleName" class="form-label">Sobrenome</label>
-                    <input type="text" name="sobrenome" id="sobrenome" class="form-control" aria-label="Last name" required>
-                </div>
-            </div>
+          <form class="px-4 py-3" action="../backend/login.php" method="POST">
             <div class="mb-3">
               <label for="exampleDropdownFormEmail1" class="form-label">Email</label>
-              <input type="email" name="email" id="email" class="form-control" required>
+              <input type="email" class="form-control" name="email" id="email" required>
             </div>
             <div class="mb-3">
               <label for="exampleDropdownFormPassword1" class="form-label">Senha</label>
-              <input type="password" name="senha" id="senha" class="form-control" required>
+              <input type="password" class="form-control" name="senha" id="senha" required>
             </div>
             <div class="mb-3">
-              <label for="exampleDropdownFormPassword1" class="form-label">Confirmar Senha</label>
-              <input type="password" name="checksenha" id="checksenha" class="form-control" required>
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                <label class="form-check-label" for="dropdownCheck">
+                  Lembrar de mim
+                </label>
+              </div>
             </div>
-            <button type="submit" class="btn btn-primary" name="cadastrar" id="cadastrar">Cadastrar</button>
+            <button type="submit" class="btn btn-primary">Entrar</button>
           </form>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="signin.html">Já tem uma conta? Entre</a>
+          <a class="dropdown-item" href="signup.php">Novo por aqui? Cadastre-se</a>
+          <a class="dropdown-item" href="recuperaConta.php">Esqueceu sua senha?</a>
         </div>
     </div>
   </main>
@@ -98,7 +95,6 @@
   </footer>
   <!--footer end-->
 
-  <script src="../javascript/script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

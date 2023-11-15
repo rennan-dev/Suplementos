@@ -21,7 +21,7 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow custom-navbar">
       <div class="container container-fluid">
         <div class="navbar-header">
-          <a href="../index.html" class="navbar-brand float-end">
+          <a href="../index.php" class="navbar-brand float-end">
             <img src="../Imagens/urso_sem_fundo.png" alt="logo" class="img-reponsive custom-logo">
             <span class="custom-highlight">Bear</span>
           </a>
@@ -152,7 +152,7 @@
     </form>
       
     </div>
-    <a href="agradecimento.html"><button class="btn btn-primary" type="submit">Enviar pedido pelo WhatsApp</button></a>
+    <a href="agradecimento.php"><button class="btn btn-primary" type="submit">Enviar pedido pelo WhatsApp</button></a>
   </div>
 </main>
   

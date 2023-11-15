@@ -18,6 +18,9 @@
   <!--header start-->
   <header id="header">
     <!--navigation start-->
+    <?php
+    session_start();
+    ?>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow custom-navbar">
       <div class="container container-fluid">
         <div class="navbar-header">
@@ -47,22 +50,21 @@
                 <a href="#contact" class="nav-link">Contact</a>
               </li>
               <li class="nav-item dropdown custom-li">
-                <a class="nav-link dropdown-toggle" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Bem vindo, <span id="userEmail"></span>
-                </a>
+                <a class="nav-link dropdown-toggle" id="userMenu" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Perfil</a>
                 <div class="dropdown-menu" aria-labelledby="userMenu">
-                    <a class="dropdown-item" href="#" id="profileLink">Meu Perfil</a>
+                    <a class="dropdown-item" href="pages/perfil.php" id="profileLink">Meu Perfil</a>
                     <a class="dropdown-item" href="backend/logout.php" id="logoutLink">Sair</a>
                 </div>
             </li>
             </ul>
           </div>
-          <a href="./pages/pagamento.html" class="btn btn-primary mb-3" style="width: 150px; height: 35px; margin-right: 33px;"><i class="fas fa-shopping-cart"></i> Carrinho</a>
+          <a href="./pages/pagamento.php" class="btn btn-primary mb-3" style="width: 150px; height: 35px; margin-right: 33px;"><i class="fas fa-shopping-cart"></i> Carrinho</a>
         </div>
       </div>
     </nav>
     <!--navigation start-->
-
+    
     <!--home page start-->
     <section id="cover" class="container">
       <div class="row g-2 justify-content-around">
@@ -152,9 +154,9 @@
         <div class="col">
           <div class="card h-100 shadow custom-card">
             
-            <a href="Pages/produtos/creatina1.html"><img id="product1" id="product1" src="Imagens/ProdutosSemFundo/creatina_integralmedica-removebg-preview.png" alt="" class="card-img-top w-100 custom-bg"></a>
+            <a href="Pages/produtos/creatina1.php"><img id="product1" id="product1" src="Imagens/ProdutosSemFundo/creatina_integralmedica-removebg-preview.png" alt="" class="card-img-top w-100 custom-bg"></a>
             <div class="card-body">
-              <a href="Pages/produtos/creatina1.html"><h4 id="product1" class="card-title">Creatina 300g Integralmédica</h4></a>
+              <a href="Pages/produtos/creatina1.php"><h4 id="product1" class="card-title">Creatina 300g Integralmédica</h4></a>
               <p class="card-text">Indicado para: Auxilia Ganho de Energia, Auxilia Ganho de Energia<br>
                 Forma: Pó<br>
                 Glúten: Não Contém.</p>
@@ -164,16 +166,16 @@
                 <h4 class="custom-highlight">R$99</h4>
               </div>
               <div class="float-end">
-                <a href="pages/pagamento.html"><button class="btn btn-primary rounded-3 custom-btn"><i class="fas fa-cart-shopping"></i> Compre Agora</button></a>
+                <a href="pages/pagamento.php"><button class="btn btn-primary rounded-3 custom-btn"><i class="fas fa-cart-shopping"></i> Compre Agora</button></a>
               </div>
             </div>
           </div>
         </div>
         <div class="col">
           <div class="card h-100 shadow custom-card">
-            <a href="Pages/produtos/creatina2.html"><img id="product1" src="Imagens/ProdutosSemFundo/creatina_monohidratada_500g-removebg-preview.png" alt="" class="card-img-top w-100 custom-bg"></a>
+            <a href="Pages/produtos/creatina2.php"><img id="product1" src="Imagens/ProdutosSemFundo/creatina_monohidratada_500g-removebg-preview.png" alt="" class="card-img-top w-100 custom-bg"></a>
             <div class="card-body">
-              <a href="Pages/produtos/creatina2.html"><h4 id="product1" class="card-title">Creatina Monohidratada 500g</h4></a>
+              <a href="Pages/produtos/creatina2.php"><h4 id="product1" class="card-title">Creatina Monohidratada 500g</h4></a>
               <p class="card-text">Indicado para: Auxilia Ganho de Energia.<br>
                 Glúten: Não Contém.</p>
             </div>
@@ -182,16 +184,16 @@
                 <h4 class="custom-highlight">R$130</h4>
               </div>
               <div class="float-end">
-                <a href="pages/pagamento.html"><button class="btn btn-primary rounded-3 custom-btn"><i class="fas fa-cart-shopping"></i> Compre Agora</button></a>
+                <a href="pages/pagamento.php"><button class="btn btn-primary rounded-3 custom-btn"><i class="fas fa-cart-shopping"></i> Compre Agora</button></a>
               </div>
             </div>
           </div>
         </div>
         <div class="col">
           <div class="card h-100 shadow custom-card">
-            <a href="Pages/produtos/creatina3.html"><img id="product1" src="Imagens/ProdutosSemFundo/creatina_monohidratada_espartanos-removebg-preview.png" alt="" class="card-img-top w-100 custom-bg"></a>
+            <a href="Pages/produtos/creatina3.php"><img id="product1" src="Imagens/ProdutosSemFundo/creatina_monohidratada_espartanos-removebg-preview.png" alt="" class="card-img-top w-100 custom-bg"></a>
             <div class="card-body">
-              <a href="Pages/produtos/creatina3.html"><h4 id="product1" class="card-title">Creatina Monohidratada Pura 1kg - Espartanos</h4></a>
+              <a href="Pages/produtos/creatina3.php"><h4 id="product1" class="card-title">Creatina Monohidratada Pura 1kg - Espartanos</h4></a>
               <p class="card-text">Indicado para: Auxilia Ganho de Energia<br>Glúten: Não Contém.</p>
             </div>
             <div class="card-footer custom-footer">
@@ -199,7 +201,7 @@
                 <h4 class="custom-highlight">R$150</h4>
               </div>
               <div class="float-end">
-                <a href="pages/pagamento.html"><button class="btn btn-primary rounded-3 custom-btn"><i class="fas fa-cart-shopping"></i> Compre Agora</button></a>
+                <a href="pages/pagamento.php"><button class="btn btn-primary rounded-3 custom-btn"><i class="fas fa-cart-shopping"></i> Compre Agora</button></a>
               </div>
             </div>
           </div>
@@ -214,9 +216,9 @@
       <div class="row row-cols-1 row-cols-md-3 g-4">
         <div class="col">
           <div class="card h-100 shadow custom-card">
-            <a href="Pages/produtos/whey1.html"><img id="product1" src="Imagens/ProdutosSemFundo/whey_protein_isolado_iso_blend_complex_2kg_pretorian-removebg-preview.png" alt="" class="card-img-top w-100 custom-bg"></a>
+            <a href="Pages/produtos/whey1.php"><img id="product1" src="Imagens/ProdutosSemFundo/whey_protein_isolado_iso_blend_complex_2kg_pretorian-removebg-preview.png" alt="" class="card-img-top w-100 custom-bg"></a>
             <div class="card-body">
-              <a href="Pages/produtos/whey1.html"><h4 id="product1" class="card-title">Whey Protein Isolado Iso Blend Complex 2Kg - Pretorian</h4></a>
+              <a href="Pages/produtos/whey1.php"><h4 id="product1" class="card-title">Whey Protein Isolado Iso Blend Complex 2Kg - Pretorian</h4></a>
               <p class="card-text">Glúten: Contém<br>
                 Lactose: Contém<br>
                 Tipo: Proteína Isolada.</p>
@@ -226,16 +228,16 @@
                 <h4 class="custom-highlight">R$100</h4>
               </div>
               <div class="float-end">
-                <a href="pages/pagamento.html"><button class="btn btn-primary rounded-3 custom-btn"><i class="fas fa-cart-shopping"></i> Compre Agora</button></a>
+                <a href="pages/pagamento.php"><button class="btn btn-primary rounded-3 custom-btn"><i class="fas fa-cart-shopping"></i> Compre Agora</button></a>
               </div>
             </div>
           </div>
         </div>
         <div class="col">
           <div class="card h-100 shadow custom-card">
-            <a href="Pages/produtos/whey2.html"><img id="product1" src="Imagens/ProdutosSemFundo/whey_protein_nutri_refil_900g-removebg-preview.png" alt="" class="card-img-top w-100 custom-bg"></a>
+            <a href="Pages/produtos/whey2.php"><img id="product1" src="Imagens/ProdutosSemFundo/whey_protein_nutri_refil_900g-removebg-preview.png" alt="" class="card-img-top w-100 custom-bg"></a>
             <div class="card-body">
-              <a href="Pages/produtos/whey2.html"><h4 id="product1" class="card-title">Whey Protein Nutri Refil 900 g - IntegralMédica</h4></a>
+              <a href="Pages/produtos/whey2.php"><h4 id="product1" class="card-title">Whey Protein Nutri Refil 900 g - IntegralMédica</h4></a>
               <p class="card-text">Forma: Pó<br>
                 Glúten: Não Contém<br>
                 Lactose: Contém<br>
@@ -246,16 +248,16 @@
                 <h4 class="custom-highlight">R$60</h4>
               </div>
               <div class="float-end">
-                <a href="pages/pagamento.html"><button class="btn btn-primary rounded-3 custom-btn"><i class="fas fa-cart-shopping"></i> Compre Agora</button></a>
+                <a href="pages/pagamento.php"><button class="btn btn-primary rounded-3 custom-btn"><i class="fas fa-cart-shopping"></i> Compre Agora</button></a>
               </div>
             </div>
           </div>
         </div>
         <div class="col">
           <div class="card h-100 shadow custom-card">
-            <a href="Pages/produtos/whey3.html"><img id="product1" src="Imagens/ProdutosSemFundo/wheyProteinConcentrado1kgChocolateBelga.png" alt="" class="card-img-top w-100 custom-bg"></a>
+            <a href="Pages/produtos/whey3.php"><img id="product1" src="Imagens/ProdutosSemFundo/wheyProteinConcentrado1kgChocolateBelga.png" alt="" class="card-img-top w-100 custom-bg"></a>
             <div class="card-body">
-              <a href="Pages/produtos/whey3.html"><h4 id="product1" class="card-title">Whey Protein Concentrado 1kg - Chocolate - Importado - Soldiers Nutrition</h4></a>
+              <a href="Pages/produtos/whey3.php"><h4 id="product1" class="card-title">Whey Protein Concentrado 1kg - Chocolate - Importado - Soldiers Nutrition</h4></a>
               <p class="card-text">Glúten: Não Contém<br>
                 Lactose: Contém<br>
                 Tipo: Proteína Isolada.</p>
@@ -265,7 +267,7 @@
                 <h4 class="custom-highlight">R$90</h4>
               </div>
               <div class="float-end">
-                <a href="pages/pagamento.html"><button class="btn btn-primary rounded-3 custom-btn"><i class="fas fa-cart-shopping"></i> Compre Agora</button></a>
+                <a href="pages/pagamento.php"><button class="btn btn-primary rounded-3 custom-btn"><i class="fas fa-cart-shopping"></i> Compre Agora</button></a>
               </div>
             </div>
           </div>
@@ -287,7 +289,7 @@
   </footer>
   <!--footer end-->
 
-    <script src="javascript/script.js"></script>
+  <script src="javascript/script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

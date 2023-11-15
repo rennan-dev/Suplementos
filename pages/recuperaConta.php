@@ -21,7 +21,7 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow custom-navbar">
       <div class="container container-fluid">
         <div class="navbar-header">
-          <a href="../index.html" class="navbar-brand float-end">
+          <a href="" class="navbar-brand float-end">
             <img src="../Imagens/urso_sem_fundo.png" alt="logo" class="img-reponsive custom-logo">
             <span class="custom-highlight">Bear</span>
           </a>
@@ -54,7 +54,7 @@
     <div id="login">
         <h2>Recuperação de Conta</h2>
     </div>
-    <form class="px-4 py-3" action="confirmaRecuperacao.html">
+    <form class="px-4 py-3" action="confirmaRecuperacao.php">
         <div class="mb-3">
           <label for="exampleDropdownFormEmail1" class="form-label">Digite seu Email abaixo</label>
           <input type="email" class="form-control" id="exampleDropdownFormEmail1">

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Conta em recuperação</title>
+  <title>Obrigado</title>
   <!--bootstrap css-->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <!--main css-->
@@ -21,7 +21,7 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow custom-navbar">
       <div class="container container-fluid">
         <div class="navbar-header">
-          <a href="../index.html" class="navbar-brand float-end">
+          <a href="../index.php" class="navbar-brand float-end">
             <img src="../Imagens/urso_sem_fundo.png" alt="logo" class="img-reponsive custom-logo">
             <span class="custom-highlight">Bear</span>
           </a>
@@ -36,30 +36,38 @@
             <li class="nav-item custom-li">
               <a href="#" aria-current="page" class="nav-link active">Home</a>
             </li>
+            
             <li class="nav-item custom-li">
               <a href="#contact" class="nav-link">Contact</a>
             </li>
-          </ul>
+            
         </div>
       </div>
     </nav>
     <!--navigation start-->
-   
+    
   </header>
   <!--header end-->
 
-  <!--main section start-->
-  <main class="container mt-5">
-    <div id="login">
-        <h2>Um e-mail foi enviado para você</h2>
+
+
+  <main class="container mt-5 card">
+    <div class="card-body">
+        <div id="login">
+            <h2>Obrigado pela compra!</h2>
+        </div>
+        <div>
+            <p>Prezado(a) Cliente,</p>
+            <p>Gostaríamos de expressar nossa sincera gratidão por escolher nossa loja e adquirir um de nossos produtos. É um prazer tê-lo(a) como nosso(a) cliente e esperamos que sua experiência de compra tenha sido excelente.</p>
+            <p>Nosso compromisso é sempre oferecer produtos de alta qualidade e um atendimento excepcional. Se houver qualquer dúvida ou se precisar de assistência adicional, não hesite em entrar em contato conosco.</p>
+            <p>Agradecemos novamente por confiar em nós. Valorizamos muito sua preferência e esperamos recebê-lo(a) em nossa loja novamente em breve.</p>
+            
+        </div>
     </div>
-   <p>Um e-mail contendo instruções para a recuperação da sua conta foi enviado para o seu 
-    endereço de e-mail registrado. Por favor, acesse sua 
-    caixa de entrada e siga as orientações fornecidas para completar o processo de recuperação.<br><br>
-    Se precisar de qualquer assistência adicional, não hesite em entrar em contato conosco.
-</p>
+
   </main>
-  <!--main section end-->
+
+
 
   <!--footer start-->
   <footer id="footer" class="bg-dark text-white text-center py-4 mt-5">
