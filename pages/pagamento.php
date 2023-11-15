@@ -49,6 +49,19 @@
   </header>
   <!--header end-->
 
+  <!-- Carrinho de Compras start-->
+  <div id="cart" class="cart card fixed-top bg-light" style="width: 350px; margin-top: 110px; margin-left: 1500px;">
+    <div class="card-header">
+        <h3 class="card-title">Carrinho de Compras</h3>
+    </div>
+    <ul id="cart-items" class="list-group list-group-flush" style="list-style-type: none;"></ul>
+    <div class="card-footer bg-light text-dark font-weight-bold" style="display: flex; justify-content: space-between; align-items: center;">
+        <p id="cart-total">Total: R$0</p>
+        <!-- Adicionando o botão "Comprar" -->
+    </div>
+  </div>
+  <!--Carrinho de compras end-->
+
   <!--Payment new start-->
   <main class="container mt-5 card">
     <div id="login" class="mt-4">
@@ -172,8 +185,32 @@
       <p>WhatsApp: (92) 99396-0786</p>
     </div>
   </footer>
-  <!--footer end-->
+  <!--footer end--> 
 
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const cartDataParam = urlParams.get("cart");
+    const totalParam = urlParams.get("total");
+
+    if (cartDataParam) {
+        const decodedCartData = JSON.parse(decodeURIComponent(cartDataParam));
+        const tableBody = document.getElementById("cart"); // Substitua pelo ID real da tabela
+
+        decodedCartData.forEach(item => {
+            const row = document.createElement("tr");
+            row.innerHTML = `<td>${item.name}</td><td>${item.quantity}x </td><td>R$${item.price.toFixed(2)}</td>`;
+            tableBody.appendChild(row);
+        });
+
+        // Exiba o preço total na página
+        const totalElement = document.getElementById("cart-total"); // Substitua pelo ID real do elemento que exibirá o total
+        totalElement.innerText = `Total: R$${totalParam}`;
+    }
+});
+
+
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

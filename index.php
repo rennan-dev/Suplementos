@@ -59,7 +59,6 @@
             </li>
             </ul>
           </div>
-          <a href="./pages/pagamento.php" class="btn btn-primary mb-3" style="width: 150px; height: 35px; margin-right: 33px;"><i class="fas fa-shopping-cart"></i> Carrinho</a>
         </div>
       </div>
     </nav>
@@ -88,13 +87,17 @@
   <!--header end-->
 
   <!-- Carrinho de Compras start-->
-  <div id="cart" class="cart card fixed-top bg-light" style="width: 300px; right: 0; margin-top: 110px;">
+  <div id="cart" class="cart card fixed-top bg-light" style="width: 300px; margin-top: 110px; margin-left: 1500px;">
     <div class="card-header">
         <h3 class="card-title">Carrinho de Compras</h3>
         <button id="toggle-products" class="btn btn-primary" style="position: absolute; top: 5px; right: 5px;" onclick="toggleProducts()">-</button>
     </div>
-    <ul id="cart-items" class="list-group list-group-flush"></ul>
-    <p id="cart-total" class="card-footer bg-light text-dark font-weight-bold">Total: R$0</p>
+    <ul id="cart-items" class="list-group list-group-flush" style="list-style-type: none;"></ul>
+    <div class="card-footer bg-light text-dark font-weight-bold" style="display: flex; justify-content: space-between; align-items: center;">
+        <p id="cart-total">Total: R$0</p>
+        <!-- Adicionando o botão "Comprar" -->
+        <button class="btn btn-success" style="flex-shrink: 0;" onclick="comprar()">Comprar</button>
+    </div>
   </div>
   <!--Carrinho de compras end-->
 
@@ -309,6 +312,43 @@
       button.addEventListener("click", addToCart);
     });
 
+    /*Botão Comprar*/
+    function comprar() {
+    const cartItems = document.querySelectorAll("#cart-items li");
+
+    if (cartItems.length === 0) {
+        alert("Seu carrinho está vazio. Adicione itens antes de comprar!");
+    } else {
+        const cartData = [];
+        let total = 0;
+
+        cartItems.forEach(item => {
+            const itemName = item.innerText.split(" - ")[0];
+            const itemPrice = parseFloat(item.innerText.split("R$")[1]);
+            const itemQuantity = parseInt(item.querySelector(".quantity").innerText);
+
+            cartData.push({
+                name: itemName,
+                price: itemPrice,
+                quantity: itemQuantity
+            });
+
+            total += itemPrice * itemQuantity;
+        });
+
+        const encodedCartData = encodeURIComponent(JSON.stringify(cartData));
+
+        // Inclua o preço total na URL
+        window.location.href = `pages/pagamento.php?cart=${encodedCartData}&total=${total.toFixed(2)}`;
+    }
+}
+
+
+    // Adicione a função comprar() ao botão "Comprar"
+    const comprarButton = document.querySelector("#cart .btn-success");
+    comprarButton.addEventListener("click", comprar);
+    /*Botão Comprar*/ 
+
     function addToCart() {
       // Obtenha informações do produto
       const productContainer = this.closest(".custom-card");
@@ -383,6 +423,7 @@
       // Atualize o total do carrinho
       document.getElementById("cart-total").innerText = `Total: R$${total.toFixed(2)}`;
     }
+
   });
 
   function toggleProducts() {
@@ -406,7 +447,10 @@
             productsButton.innerText = '+';
         }
     }
+
+   
 </script>
+
 
 
 
