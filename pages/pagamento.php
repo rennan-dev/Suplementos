@@ -50,14 +50,15 @@
   <!--header end-->
 
   <!-- Carrinho de Compras start-->
-  <div id="cart" class="cart card fixed-top bg-light" style="width: 350px; margin-top: 110px; margin-left: 1500px;">
+  <div id="cart" class="cart card fixed-top bg-light" style="width: 350px; margin-top: 110px;">
     <div class="card-header">
         <h3 class="card-title">Carrinho de Compras</h3>
     </div>
-    <ul id="cart-items" class="list-group list-group-flush" style="list-style-type: none;"></ul>
+    <ul id="cart-items" class="list-group list-group-flush" style="list-style-type: none;">
+    </ul>
     <div class="card-footer bg-light text-dark font-weight-bold" style="display: flex; justify-content: space-between; align-items: center;">
         <p id="cart-total">Total: R$0</p>
-        <!-- Adicionando o botão "Comprar" -->
+        <button id="toggleCartButton" class="btn btn-primary">-</button>
     </div>
   </div>
   <!--Carrinho de compras end-->
@@ -67,46 +68,33 @@
     <div id="login" class="mt-4">
       <h2>Confirmação</h2>
     </div>
-  <div class="d-flex align-items-center justify-content-center mt-4 card-body" style="width: 100%;">
+  <div class="d-flex align-items-center justify-content-center mt-4 card-body mx-auto" style="width: 80%;">
     
-    <form class="row g-3 needs-validation" novalidate>
-      <div class="col-md-4">
-        <label for="validationCustom01" class="form-label">Primeiro Nome</label>
-        <input type="text" class="form-control" id="validationCustom01" required>
-        <div class="valid-feedback">
-          Boa sorte!
-        </div>
-      </div>
-      <div class="col-md-4">
-        <label for="validationCustom02" class="form-label">Sobrenome</label>
-        <input type="text" class="form-control" id="validationCustom02" required>
-        <div class="valid-feedback">
-          Boa sorte!
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="mb-3">
-          <label for="exampleDropdownFormEmail1" class="form-label">Email</label>
-          <input type="email" class="form-control" id="exampleDropdownFormEmail1">
-        </div>
-      </div>
+    <form class="row g-3 needs-validation" novalidate id="paymentForm" action="../backend/processar_pedido.php" method="POST">
       <div class="col-md-3">
         <label for="validationCustom03" class="form-label">Endereço</label>
-        <input type="text" class="form-control" id="validationCustom03" required>
+        <input type="text" class="form-control" id="endereco" name="endereco" required>
         <div class="invalid-feedback">
           Forneça um endereço válido.
         </div>
       </div>
       <div class="col-md-3">
+        <label for="validationCustom03" class="form-label">Bairro</label>
+        <input type="text" class="form-control" id="bairro" name="bairro" required>
+        <div class="invalid-feedback">
+          Forneça um Bairro válido.
+        </div>
+      </div>
+      <div class="col-md-3">
         <label for="validationCustom03" class="form-label">Cidade</label>
-        <input type="text" class="form-control" id="validationCustom03" required>
+        <input type="text" class="form-control" id="cidade" name="cidade" required>
         <div class="invalid-feedback">
           Forneça uma cidade válida.
         </div>
       </div>
       <div class="col-md-3">
         <label for="validationCustom04" class="form-label">Estado</label>
-        <select class="form-select" id="validationCustom04" required>
+        <select class="form-select" id="estado" name="estado" required>
           <option selected disabled value="">Escolha...</option>
             <option value="AC">AC</option>
             <option value="AL">AL</option>
@@ -143,7 +131,7 @@
       </div>
       <div class="col-md-3">
         <label for="validationCustom05" class="form-label">CEP</label>
-        <input type="text" class="form-control" id="validationCustom05" required>
+        <input type="text" class="form-control" id="cep" name="cep" required>
         <div class="invalid-feedback">
           Selecione um CEP válido
         </div>
@@ -161,20 +149,16 @@
         </div>
       </div>
       
-        
+       <!-- Adicione um campo oculto para armazenar os itens do carrinho -->
+      <input type="hidden" name="itens_carrinho" id="itens_carrinho" value="">
+      <button class="btn btn-primary mx-auto" type="submit" id="enviar-btn" style="width: 50%;">Enviar pedido pelo WhatsApp</button>
     </form>
       
     </div>
-    <a href="agradecimento.php"><button class="btn btn-primary" type="submit">Enviar pedido pelo WhatsApp</button></a>
   </div>
 </main>
   
   <!--Payment new end-->
-
-
-
-
-
 
   <!--footer start-->
   <footer id="footer" class="bg-dark text-white text-center py-4 mt-5">
@@ -188,30 +172,70 @@
   <!--footer end--> 
 
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
+    let decodedCartData;
+
     const urlParams = new URLSearchParams(window.location.search);
     const cartDataParam = urlParams.get("cart");
     const totalParam = urlParams.get("total");
 
     if (cartDataParam) {
-        const decodedCartData = JSON.parse(decodeURIComponent(cartDataParam));
-        const tableBody = document.getElementById("cart"); // Substitua pelo ID real da tabela
+        decodedCartData = JSON.parse(decodeURIComponent(cartDataParam));
+        const tableBody = document.getElementById("cart-items");
 
         decodedCartData.forEach(item => {
-            const row = document.createElement("tr");
-            row.innerHTML = `<td>${item.name}</td><td>${item.quantity}x </td><td>R$${item.price.toFixed(2)}</td>`;
+            const row = document.createElement("li");
+            row.innerHTML = `${item.name} - ${item.quantity}x - R$${item.price.toFixed(2)}`;
             tableBody.appendChild(row);
         });
 
-        // Exiba o preço total na página
-        const totalElement = document.getElementById("cart-total"); // Substitua pelo ID real do elemento que exibirá o total
+        const totalElement = document.getElementById("cart-total");
         totalElement.innerText = `Total: R$${totalParam}`;
+
+        // Adiciona os itens do carrinho ao campo oculto no formulário
+        const cartItemsInput = document.getElementById("itens_carrinho");
+        cartItemsInput.value = JSON.stringify(decodedCartData);
     }
+
+    function enviarPedido(event) {
+        // Validação manual do formulário usando Bootstrap
+        const form = document.getElementById('paymentForm');
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+        
+    }
+
+    // Adicionado o event como um argumento ao chamar a função enviarPedido
+    document.getElementById('enviar-btn').addEventListener('click', function(event) {
+        enviarPedido(event);
+    });
+
+    /*Minimizar e Maximizar*/
+      
+    const cartItems = document.getElementById('cart-items');
+        const toggleCartButton = document.getElementById('toggleCartButton');
+        
+        let isCartMinimized = false;
+
+        toggleCartButton.addEventListener('click', function () {
+            isCartMinimized = !isCartMinimized;
+            if (isCartMinimized) {
+                cartItems.style.display = 'none';
+                toggleCartButton.textContent = '+';
+            } else {
+                cartItems.style.display = 'block';
+                toggleCartButton.textContent = '-';
+            }
+        });
 });
-
-
+  
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 
 </html>
