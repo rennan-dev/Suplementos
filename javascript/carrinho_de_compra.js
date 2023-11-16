@@ -1,122 +1,119 @@
 document.addEventListener("DOMContentLoaded", function () {
-const addToCartButtons = document.querySelectorAll(".custom-btn");
+    const addToCartButtons = document.querySelectorAll(".custom-btn");
 
-addToCartButtons.forEach(button => {
-button.addEventListener("click", addToCart);
-});
-
-/*Botão Comprar*/
-function comprar() {
-const cartItems = document.querySelectorAll("#cart-items li");
-
-if (cartItems.length === 0) {
-    alert("Seu carrinho está vazio. Adicione itens antes de comprar!");
-} else {
-    const cartData = [];
-    let total = 0;
-
-    cartItems.forEach(item => {
-        const itemName = item.innerText.split(" - ")[0];
-        const itemPrice = parseFloat(item.innerText.split("R$")[1]);
-        const itemQuantity = parseInt(item.querySelector(".quantity").innerText);
-
-        cartData.push({
-            name: itemName,
-            price: itemPrice,
-            quantity: itemQuantity
-        });
-
-        total += itemPrice * itemQuantity;
+    addToCartButtons.forEach(button => {
+    button.addEventListener("click", addToCart);
     });
 
-    const encodedCartData = encodeURIComponent(JSON.stringify(cartData));
+    function comprar() {
+        const cartItems = document.querySelectorAll("#cart-items li");
 
-    // Inclua o preço total na URL
-    window.location.href = `../pagamento.php?cart=${encodedCartData}&total=${total.toFixed(2)}`;
-}
-}
+        if (cartItems.length === 0) {
+            alert("Seu carrinho está vazio. Adicione itens antes de comprar!");
+        } else {
+            const cartData = [];
+            let total = 0;
+
+            cartItems.forEach(item => {
+                const itemName = item.innerText.split(" - ")[0];
+                const itemPrice = parseFloat(item.innerText.split("R$")[1]);
+                const itemQuantity = parseInt(item.querySelector(".quantity").innerText);
+
+                cartData.push({
+                    name: itemName,
+                    price: itemPrice,
+                    quantity: itemQuantity
+                });
+
+                total += itemPrice * itemQuantity;
+            });
+
+            const encodedCartData = encodeURIComponent(JSON.stringify(cartData));
+
+            // Inclua o preço total na URL
+            window.location.href = `../pagamento.php?cart=${encodedCartData}&total=${total.toFixed(2)}`;
+        }
+    }
 
 
-// Adicione a função comprar() ao botão "Comprar"
-const comprarButton = document.querySelector("#cart .btn-success");
-comprarButton.addEventListener("click", comprar);
-/*Botão Comprar*/ 
+    // Adicione a função comprar() ao botão "Comprar"
+    const comprarButton = document.querySelector("#cart .btn-success");
+    comprarButton.addEventListener("click", comprar);
 
-function addToCart() {
-// Obtenha informações do produto
-const productContainer = this.closest(".custom-card");
-const productName = productContainer.querySelector(".card-title").innerText;
+    function addToCart() {
+        // Obtenha informações do produto
+        const productContainer = this.closest(".custom-card");
+        const productName = productContainer.querySelector(".card-title").innerText;
 
-// Verifique se o item já está no carrinho
-const cartItems = document.querySelectorAll("#cart-items li");
-const existingCartItem = Array.from(cartItems).find(item => item.innerText.includes(productName));
+        // Verifique se o item já está no carrinho
+        const cartItems = document.querySelectorAll("#cart-items li");
+        const existingCartItem = Array.from(cartItems).find(item => item.innerText.includes(productName));
 
-if (existingCartItem) {
-    // Se o item já existir, exiba um alerta
-    alert("Este produto já está no carrinho!");
-} else {
-    // Caso contrário, adicione o item ao carrinho
-    const productPrice = parseFloat(productContainer.querySelector(".custom-highlight").innerText.replace("R$", ""));
+        if (existingCartItem) {
+            // Se o item já existir, exiba um alerta
+            alert("Este produto já está no carrinho!");
+        } else {
+            // Caso contrário, adicione o item ao carrinho
+            const productPrice = parseFloat(productContainer.querySelector(".custom-highlight").innerText.replace("R$", ""));
 
-    const cartItem = document.createElement("li");
-    cartItem.innerHTML = `
-    <button class="btn btn-danger btn-sm" onclick="decrementQuantity(this)">-</button>
-    <span class="quantity">1</span>
-    <button class="btn btn-success btn-sm" onclick="incrementQuantity(this)">+</button>
-    ${productName} - R$${productPrice}
-    `;
+            const cartItem = document.createElement("li");
+            cartItem.innerHTML = `
+            <button class="btn btn-danger btn-sm" onclick="decrementQuantity(this)">-</button>
+            <span class="quantity">1</span>
+            <button class="btn btn-success btn-sm" onclick="incrementQuantity(this)">+</button>
+            ${productName} - R$${productPrice}
+            `;
 
-    document.getElementById("cart-items").appendChild(cartItem);
+            document.getElementById("cart-items").appendChild(cartItem);
 
-    // Adicione eventos de clique para os novos botões
-    const decrementButton = cartItem.querySelector(".btn-danger");
-    const incrementButton = cartItem.querySelector(".btn-success");
+            // Adicione eventos de clique para os novos botões
+            const decrementButton = cartItem.querySelector(".btn-danger");
+            const incrementButton = cartItem.querySelector(".btn-success");
 
-    decrementButton.addEventListener("click", () => decrementQuantity(cartItem));
-    incrementButton.addEventListener("click", () => incrementQuantity(cartItem));
-}
+            decrementButton.addEventListener("click", () => decrementQuantity(cartItem));
+            incrementButton.addEventListener("click", () => incrementQuantity(cartItem));
+        }
 
-// Atualize o total do carrinho
-updateCartTotal();
-}
+        // Atualize o total do carrinho
+        updateCartTotal();
+    }
 
-function incrementQuantity(cartItem) {
-const quantityElement = cartItem.querySelector(".quantity");
-const quantity = parseInt(quantityElement.innerText);
-quantityElement.innerText = quantity + 1;
-updateCartTotal();
-}
+    function incrementQuantity(cartItem) {
+        const quantityElement = cartItem.querySelector(".quantity");
+        const quantity = parseInt(quantityElement.innerText);
+        quantityElement.innerText = quantity + 1;
+        updateCartTotal();
+    }
 
-function decrementQuantity(cartItem) {
-const quantityElement = cartItem.querySelector(".quantity");
-const quantity = parseInt(quantityElement.innerText);
+    function decrementQuantity(cartItem) {
+        const quantityElement = cartItem.querySelector(".quantity");
+        const quantity = parseInt(quantityElement.innerText);
 
-if (quantity > 1) {
-    // Se a quantidade for maior que 1, decrementa
-    quantityElement.innerText = quantity - 1;
-} else {
-    // Se a quantidade for 1, remove o item do carrinho
-    cartItem.remove();
-}
+        if (quantity > 1) {
+            // Se a quantidade for maior que 1, decrementa
+            quantityElement.innerText = quantity - 1;
+        } else {
+            // Se a quantidade for 1, remove o item do carrinho
+            cartItem.remove();
+        }
 
-updateCartTotal();
-}
+        updateCartTotal();
+    }
 
-function updateCartTotal() {
-const cartItems = document.querySelectorAll("#cart-items li");
-let total = 0;
+    function updateCartTotal() {
+        const cartItems = document.querySelectorAll("#cart-items li");
+        let total = 0;
 
-cartItems.forEach(item => {
-    const itemText = item.innerText;
-    const price = parseFloat(itemText.substring(itemText.lastIndexOf("R$") + 2));
-    const quantity = parseInt(item.querySelector(".quantity").innerText);
-    total += price * quantity;
-});
+        cartItems.forEach(item => {
+            const itemText = item.innerText;
+            const price = parseFloat(itemText.substring(itemText.lastIndexOf("R$") + 2));
+            const quantity = parseInt(item.querySelector(".quantity").innerText);
+            total += price * quantity;
+        });
 
-// Atualize o total do carrinho
-document.getElementById("cart-total").innerText = `Total: R$${total.toFixed(2)}`;
-}
-
+        // Atualize o total do carrinho
+        document.getElementById("cart-total").innerText = `Total: R$${total.toFixed(2)}`;
+    }
 });
 
 function toggleProducts() {

@@ -38,9 +38,6 @@
             <li class="nav-item custom-li">
               <a href="#contact" class="nav-link">Contact</a>
             </li>
-            <li class="nav-item custom-li">
-              <a href="../../Pages/signin.php" class="nav-link">Login</a>
-            </li>
           </ul>
         </div>
       </div>
@@ -49,6 +46,21 @@
 
   </header>
   <!--header end-->
+
+  <!-- Carrinho de Compras start-->
+  <div id="cart" class="cart card fixed-top bg-light" style="width: 300px; margin-top: 110px; margin-left: 200px;">
+    <div class="card-header">
+        <h3 class="card-title">Carrinho de Compras</h3>
+        <button id="toggle-products" class="btn btn-primary" style="position: absolute; top: 5px; right: 5px;" onclick="toggleProducts()">-</button>
+    </div>
+    <ul id="cart-items" class="list-group list-group-flush" style="list-style-type: none;"></ul>
+    <div class="card-footer bg-light text-dark font-weight-bold" style="display: flex; justify-content: space-between; align-items: center;">
+        <p id="cart-total">Total: R$0</p>
+        <!-- Adicionando o botão "Comprar" -->
+        <button class="btn btn-success" style="flex-shrink: 0;" onclick="comprar()" id="botao_comprar">Comprar</button>
+    </div>
+  </div>
+  <!--Carrinho de compras end-->
 
   <!--main section start-->
   <main class="container">
@@ -69,7 +81,9 @@
                     <h4 class="custom-highlight">R$90</h4>
                   </div>
                   <div class="float-end">
-                    <a href="../pagamento.php"><button class="btn btn-primary rounded-3 custom-btn"><i class="fas fa-cart-shopping"></i> Compre Agoras</button></a>
+                  <button class="btn btn-primary rounded-3 custom-btn" type="button">
+                    <i class="fas fa-cart-shopping"></i> Compre Agora
+                  </button>
                   </div>
                 </div>
             </div>
@@ -129,6 +143,7 @@
   </footer>
   <!--footer end-->
 
+  <script src="../../javascript/carrinho_de_compra.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

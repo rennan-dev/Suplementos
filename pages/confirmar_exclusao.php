@@ -3,7 +3,6 @@
 <html lang="pt-br">
 
 <head>
-    <!-- Adicione os metadados necessários -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Confirmar Exclusão</title>

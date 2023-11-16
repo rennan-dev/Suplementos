@@ -1,4 +1,5 @@
 <?php
+//criar usuarios
 
 session_start();
 
@@ -37,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Adiciona um script JavaScript para exibir um alerta e abrir a página de login
         echo '<script type="text/javascript">
                 alert("Cadastro realizado com sucesso.");
-                window.location.href = "../pages/signin.html";
+                window.location.href = "../pages/signin.php";
               </script>';
     }else {
         echo "Erro ao cadastrar: " . $mysqli->error;

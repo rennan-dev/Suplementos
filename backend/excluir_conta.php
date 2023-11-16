@@ -1,4 +1,3 @@
-<!-- excluir_conta.php -->
 <?php
 session_start();
 
@@ -11,23 +10,40 @@ if (!isset($_SESSION["email"])) {
 // Incluir o arquivo de conexão
 include 'conexao.php';
 
-// Excluir conta e dados associados no banco de dados
-$email = $_SESSION["email"];
+// Iniciar uma transação para garantir que ambas as exclusões(usuario e pedidos) sejam bem-sucedidas ou nenhuma delas seja realizada
+$mysqli->begin_transaction();
 
-// Exemplo de SQL para excluir a conta (ajuste conforme necessário)
-$sql = "DELETE FROM usuario WHERE email = ?";
-$stmt = $mysqli->prepare($sql);
-$stmt->bind_param("s", $email);
-$stmt->execute();
-$stmt->close();
+try {
+    // Excluir pedidos associados ao usuário
+    $email = $_SESSION["email"];
+    $stmtPedidos = $mysqli->prepare("DELETE FROM pedidos WHERE email_usuario = ?");
+    $stmtPedidos->bind_param("s", $email);
+    $stmtPedidos->execute();
+    $stmtPedidos->close();
 
-// Limpar todas as variáveis de sessão
-session_unset();
+    // Excluir o usuário
+    $stmtUsuario = $mysqli->prepare("DELETE FROM usuario WHERE email = ?");
+    $stmtUsuario->bind_param("s", $email);
+    $stmtUsuario->execute();
+    $stmtUsuario->close();
 
-// Destruir a sessão
-session_destroy();
+    // Limpar todas as variáveis de sessão
+    session_unset();
 
-// Redirecionar para a página de login ou outra página após a exclusão
-header("Location: ../pages/signin.php");
-exit();
+    // Confirmar as alterações na transação
+    $mysqli->commit();
+
+    // Destruir a sessão
+    session_destroy();
+
+    // Redirecionar para a página de login ou outra página após a exclusão
+    header("Location: ../pages/signin.php");
+    exit();
+} catch (Exception $e) {
+    // Se ocorrer algum erro, reverter as alterações na transação e tratar o erro
+    $mysqli->rollback();
+
+    // Exibir ou registrar o erro conforme necessário
+    echo "Erro: " . $e->getMessage();
+}
 ?>

@@ -21,7 +21,7 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow custom-navbar">
       <div class="container container-fluid">
         <div class="navbar-header">
-          <a href="" class="navbar-brand float-end">
+          <a href="signin.php" class="navbar-brand float-end">
             <img src="../Imagens/urso_sem_fundo.png" alt="logo" class="img-reponsive custom-logo">
             <span class="custom-highlight">Bear</span>
           </a>

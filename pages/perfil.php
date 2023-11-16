@@ -178,7 +178,6 @@ if (!isset($_SESSION["email"])) {
                 url: "../backend/atualizar_dados.php",
                 data: { tipo: 'nome', novoValor: novoNome },
                 success: function (response) {
-                    // Atualizar valor na página (opcional)
                     document.getElementById('nome').innerText = novoNome;
 
                     // Fechar o modal
@@ -206,7 +205,6 @@ if (!isset($_SESSION["email"])) {
                 url: "../backend/atualizar_dados.php",
                 data: { tipo: 'sobrenome', novoValor: novoSobrenome },
                 success: function (response) {
-                    // Atualizar valor na página (opcional)
                     document.getElementById('sobrenome').innerText = novoSobrenome;
 
                     // Fechar o modal
@@ -215,8 +213,6 @@ if (!isset($_SESSION["email"])) {
             });
         }
     </script>
-
-<!-- ... Seu código posterior ... -->
 
 </body>
 

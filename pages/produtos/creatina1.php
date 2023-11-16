@@ -38,9 +38,6 @@
             <li class="nav-item custom-li">
               <a href="#contact" class="nav-link">Contact</a>
             </li>
-            <li class="nav-item custom-li">
-              <a href="../../Pages/signin.php" class="nav-link">Login</a>
-            </li>
           </ul>
         </div>
       </div>

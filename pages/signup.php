@@ -21,7 +21,7 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow custom-navbar">
       <div class="container container-fluid">
         <div class="navbar-header">
-          <a href="../index.php" class="navbar-brand float-end">
+          <a class="navbar-brand float-end">
             <img src="../Imagens/urso_sem_fundo.png" alt="logo" class="img-reponsive custom-logo">
             <span class="custom-highlight">Bear</span>
           </a>
@@ -34,7 +34,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="nav navbar-nav ms-auto custom-ul">
             <li class="nav-item custom-li">
-              <a href="#" aria-current="page" class="nav-link active">Home</a>
+              <a aria-current="page" class="nav-link active">Home</a>
             </li>
             <li class="nav-item custom-li">
               <a href="#contact" class="nav-link">Contact</a>

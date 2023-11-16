@@ -17,7 +17,7 @@ if (!isset($_SESSION['email'])) {
 // Obtenha o e-mail do usuário a partir da sessão
 $emailUsuario = $_SESSION['email'];
 
-// Obtenha os dados do formulário (agora o e-mail é obtido da sessão)
+// Obtenha os dados do formulário
 $endereco = $_POST['endereco'];
 $bairro = $_POST['bairro'];
 $cidade = $_POST['cidade'];
@@ -31,7 +31,6 @@ $decodedCartData = json_decode($itensCarrinho, true);
 
 if (!empty($decodedCartData)) {
     foreach ($decodedCartData as $item) {
-        // Certifique-se de que as chaves 'price' e 'quantity' existem no item
         if (isset($item['price'], $item['quantity'])) {
             $total += $item['price'] * $item['quantity'];
         }
@@ -44,7 +43,7 @@ if ($mysqli->query($sql) === TRUE) {
 
     echo '<script type="text/javascript">
             alert("Pedido Enviado para Banco de Dados");
-            window.location.href = "../index.php";
+            window.location.href = "../pages/agradecimento.php";
           </script>';
 } else {
     echo "Erro ao salvar o pedido: " . $mysqli->error;

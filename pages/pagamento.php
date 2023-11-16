@@ -149,7 +149,7 @@
         </div>
       </div>
       
-       <!-- Adicione um campo oculto para armazenar os itens do carrinho -->
+       <!-- Adicionado um campo oculto para armazenar os itens do carrinho -->
       <input type="hidden" name="itens_carrinho" id="itens_carrinho" value="">
       <button class="btn btn-primary mx-auto" type="submit" id="enviar-btn" style="width: 50%;">Enviar pedido pelo WhatsApp</button>
     </form>
